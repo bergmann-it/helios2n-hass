@@ -22,7 +22,7 @@ Supported devices:
 
 # Installation
 ## HACS
-1. Add https://github.com/SVD-NL/helios2n-hass as a custom repository
+1. Add https://github.com/Neffez/helios2n-hass as a custom repository
 2. Download 2n/Helios through the regular explore & download prompt
 3. Restart Homeassistant
 
