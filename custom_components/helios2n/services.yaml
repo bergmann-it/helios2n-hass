@@ -4,7 +4,7 @@
 api_call:
   # Different fields that your service action accepts
   fields:
-    endoint:
+    endpoint:
       # Whether or not field is required (default = false)
       required: true
       example: "switch/status"
