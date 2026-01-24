@@ -7,7 +7,7 @@ from homeassistant.helpers.typing import ConfigType
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 
 from py2n import Py2NDevice, Py2NConnectionData
-from py2n.exceptions import DeviceConnectionError, DeviceUnsupportedError, DeviceApiError, ApiError
+from py2n.exceptions import DeviceConnectionError, DeviceUnsupportedError, DeviceApiError, ApiError, Py2NError
 
 import asyncio
 from asyncio import TimeoutError
@@ -20,7 +20,7 @@ platforms = [Platform.BUTTON, Platform.LOCK, Platform.SWITCH, Platform.BINARY_SE
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 	
 	@callback
-	async def api_call(call: ServiceCall) -> None:
+	async def api_call(call: ServiceCall) -> ServiceResponse:
 		domain = hass.data.get(DOMAIN,{})
 		if(len(domain) < 1):
 			raise ServiceValidationError("helios2n is not set up.")
@@ -34,7 +34,14 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 		timeout = call.data.get(ATTR_TIMEOUT,DEFAULT_TIMEOUT)
 		data = call.data.get(ATTR_DATA)
 		json = call.data.get(ATTR_JSON)
-		result = device.api_request(endpoint, timeout, method, data, json)
+		result = {}
+		try: 
+			result = device.api_request(endpoint, timeout, method, data, json)
+		except Py2NError as err:
+			raise HomeAssistantError("error from api call:") from err
+
+		return result
+
 
 	hass.services.async_register(DOMAIN, "api_call", api_call,supports_response=SupportsResponse.ONLY)
 
