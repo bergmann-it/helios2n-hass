@@ -54,8 +54,8 @@ SENSOR_TYPES = {
 }
 
 async def async_setup_entry(hass: HomeAssistant, config: ConfigType, async_add_entities: AddEntitiesCallback):
-    device: Py2NDevice = hass.data[DOMAIN][config.entry_id]
-    coordinator: Helios2nSensorDataUpdateCoordinator = hass.data[DOMAIN][PLATFORM]["coordinator"]
+    device: Py2NDevice = hass.data[DOMAIN][config.entry_id]["_device"]
+    coordinator: Helios2nSensorDataUpdateCoordinator = hass.data[DOMAIN][config.entry_id][PLATFORM]["coordinator"]
     entities = []
     entities.append(Helios2nSensorEntity(coordinator, device, "uptime"))
     async_add_entities(entities)
