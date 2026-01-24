@@ -33,9 +33,7 @@ api_call:
     collapsed: true
     fields:
       entry:
-        required: false
       timeout:
-        required: false
         example: "10"
         default: "10"
         selector:

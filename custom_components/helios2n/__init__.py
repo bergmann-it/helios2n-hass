@@ -40,8 +40,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 		except Py2NError as err:
 			raise HomeAssistantError("error from api call:", err) from err
 
-        if result is None:
-            result = {}
+		if result is None:
+			result = {}
 		return result
 
 	hass.services.async_register(DOMAIN, "api_call", api_call,supports_response=SupportsResponse.ONLY)
