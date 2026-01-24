@@ -32,6 +32,8 @@ api_call:
   advanced_fields:
     collapsed: true
     fields:
+      entry:
+        required: false
       timeout:
         required: false
         example: "10"

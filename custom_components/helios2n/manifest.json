@@ -10,6 +10,6 @@
 	"requirements": [
 		"py2n@git+https://github.com/bergmann-it/py2n.git@v0.4.2-bergmann2"
 	],
-	"version": "0.3.4.1-bergmann1",
+	"version": "0.3.4-bergmann1",
 	"config_flow": true
 }
