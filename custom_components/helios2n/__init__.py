@@ -38,7 +38,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 		try: 
 			result = await device.api_request(endpoint, timeout, method, data, json)
 		except Py2NError as err:
-			raise HomeAssistantError("error from api call:") from err
+			raise HomeAssistantError("error from api call:", err) from err
 
 		return result
 
