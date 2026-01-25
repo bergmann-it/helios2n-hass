@@ -42,9 +42,13 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 		if result is None:
 			result = {}
-		return result
 
-	hass.services.async_register(DOMAIN, "api_call", api_call,supports_response=SupportsResponse.ONLY)
+		if call.return_response:
+			return result
+		else:
+			return None
+
+	hass.services.async_register(DOMAIN, "api_call", api_call,supports_response=SupportsResponse.OPTIONAL)
 
 	# Return boolean to indicate that initialization was successful.
 	return True
